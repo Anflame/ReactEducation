@@ -11,6 +11,7 @@ module.exports = {
     'plugin:prettier/recommended',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
+    'plugin:storybook/recommended',
   ],
   overrides: [
     {
@@ -39,7 +40,12 @@ module.exports = {
     ],
     quotes: ['warn', 'single'],
     'react/display-name': 'off',
-    'react/props-types': 0,
+    'react/prop-types': 0,
     semi: ['warn', 'always'],
   },
+  settings: {
+    react: {
+      version: 'detect'
+    }
+  }
 };

@@ -8,10 +8,10 @@ export const App = () => {
   useEffect(() => {
     if (messageList.length !== 0) {
       setTimeout(() => {
-          setRobotText(`${author}, Ваше сообщение доставлено`);
-          setTimeout(() => {
-            setRobotText();
-          }, 2000);
+        setRobotText(`${author}, Ваше сообщение доставлено`);
+        setTimeout(() => {
+          setRobotText();
+        }, 2000);
       }, 1000);
     }
   }, [messageList]);
