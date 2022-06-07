@@ -1,0 +1,24 @@
+
+.messageList {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    box-shadow: 0 0 20px black;
+    height: 50vh;
+    overflow: auto;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    margin-bottom: 25px;
+    padding: 25px;
+}
+.messageListes {
+    list-style-type: none;
+    padding: 10px;
+}
+.messageListes:not(:last-child){
+    border-bottom: 1px solid black;
+}
