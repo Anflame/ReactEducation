@@ -1,8 +1,11 @@
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Form } from './components/Form/Form';
 import { MessageList } from './components/MessageList/MessageList';
-export const App = () => {
-  const [messageList, setMessageList] = useState([]);
+import style from './App.module.scss';
+import { ChatList } from './components/ChantList/ChatList';
+import { Message } from './components/message';
+export const App: FC = () => {
+  const [messageList, setMessageList] = useState<Array<Message>>([]);
   useEffect(() => {
     if (messageList.length !== 0) {
       if (messageList[messageList.length - 1].author == 'Anflame') {
@@ -11,8 +14,7 @@ export const App = () => {
             author: 'bot',
             text: 'i am bot',
           };
-          messageList.push(newMessage);
-          setMessageList([...messageList]);
+          setMessageList([...messageList, newMessage]);
         }, 1500);
         return () => {
           clearTimeout(timer);
@@ -21,9 +23,10 @@ export const App = () => {
     }
   }, [messageList]);
   return (
-    <>
+    <div className={style.main}>
       <MessageList messageList={messageList} />
+      <ChatList />
       <Form setMessageList={setMessageList} messageList={messageList} />
-    </>
+    </div>
   );
 };
