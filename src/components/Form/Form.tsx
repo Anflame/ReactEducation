@@ -14,7 +14,7 @@ export const Form: FC<FormProps> = ({ setMessageList, messageList }) => {
   const handleText = (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
   };
-  const handleSubmit = (event: React.SyntheticEvent) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const newMessage = {
       author: 'Anflame',

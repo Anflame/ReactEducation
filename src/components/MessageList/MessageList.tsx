@@ -1,6 +1,7 @@
 import style from './MessageList.module.css';
 import { Message } from '../message';
 import { FC } from 'react';
+
 interface messageProps {
   messageList: Message[];
 }
