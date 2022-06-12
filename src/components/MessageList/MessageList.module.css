@@ -1,14 +1,16 @@
 
 .messageList {
-    width: 50%;
+    width: 100%;
     margin: 0 auto;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    box-shadow: 0 0 20px black;
-    height: 50vh;
+    border-bottom: 1px solid #aaa7a7;
+    border-left: 1px solid #aaa7a7;
+    border-right: 1px solid #aaa7a7;
+    min-height: 50vh;
     overflow: auto;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;

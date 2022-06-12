@@ -1,0 +1,6 @@
+.main {
+    display: grid;
+    grid-template-rows: minmax(1fr,auto) minmax(200px,auto);
+    width: 70%;
+    margin: 0 auto;
+}
