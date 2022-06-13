@@ -1,16 +1,16 @@
 import style from './MessageList.module.css';
-import { Message } from '../message';
+import { Message } from '../comon-types';
 import { FC } from 'react';
 
 interface messageProps {
-  messageList: Message[];
+  messages: Message[];
 }
-export const MessageList: FC<messageProps> = ({ messageList }) => {
+export const MessageList: FC<messageProps> = ({ messages }) => {
   return (
     <ul className={style.messageList}>
-      {messageList.map((item, idx) => (
+      {messages.map((message, idx) => (
         <li className={style.messageListes} key={idx}>
-          {item.author} : {item.text}
+          {message.author} : {message.text}
         </li>
       ))}
     </ul>

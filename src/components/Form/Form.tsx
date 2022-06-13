@@ -1,26 +1,21 @@
 import { Dispatch, FC, SetStateAction, useState } from 'react';
-import style from './Form.module.css';
-import { Button } from '@mui/material';
-import { TextField } from '@mui/material';
-import { Message } from '../message';
+import style from './Form.module.scss';
+import { Button, TextField } from '@mui/material';
+import { Message } from '../comon-types';
 interface FormProps {
-  setMessageList:
-    | Dispatch<SetStateAction<Message[]>>
-    | (([...Message]) => void);
-  messageList: Message[];
+  addMessage: (msg: Message) => void;
 }
-export const Form: FC<FormProps> = ({ setMessageList, messageList }) => {
+export const Form: FC<FormProps> = ({ addMessage }) => {
   const [text, setText] = useState('');
   const handleText = (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
   };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const newMessage = {
+    addMessage({
       author: 'Anflame',
       text,
-    };
-    setMessageList([...messageList, newMessage]);
+    });
     setText('');
   };
   return (

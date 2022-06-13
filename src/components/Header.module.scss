@@ -1,0 +1,33 @@
+.header {
+    margin: 0;
+    padding: 0;
+    min-height: 200px;
+    .nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        min-height: 100px;
+        .activeLink {
+            border-bottom:1px solid rgb(106, 106, 252);
+            border-right:1px solid rgb(106, 106, 252);
+            border-left:1px solid rgb(106, 106, 252);
+            flex-basis: 33%;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            text-decoration: none;
+            color: rgb(106, 106, 252);
+        }
+        .disActiveLink {
+            flex-basis: 33%;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            text-decoration: none;
+            color: black;
+        }
+    }
+}
+.main {
+    text-align: center;
+}
