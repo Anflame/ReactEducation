@@ -1,36 +1,37 @@
 import { nanoid } from 'nanoid';
-import { FC, useMemo, useState } from 'react';
+import { FC, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Chat, Message, Messages } from './components/comon-types';
+import { Authors, Chat, Message, Messages } from './components/comon-types';
 import { ChatList } from './components/ChantList/ChatList';
 import { Header } from './components/Header';
 import { ChatPage } from './pages/ChatPage';
 import { Profile } from './pages/Profile';
 import { Main } from './pages/Main';
+import { Provider } from 'react-redux';
+import { store } from './store';
 const defaultMessages: Messages = {
-  default: [],
+  default: [
+    {
+      author: Authors.USER,
+      text: '1',
+    },
+    {
+      author: Authors.USER,
+      text: '2',
+    },
+  ],
 };
-
 export const App: FC = () => {
   const [messages, setMesseges] = useState(defaultMessages);
 
-  const chats = useMemo(
-    () =>
-      Object.keys(messages).map((chat) => ({
-        id: nanoid(),
-        name: chat,
-      })),
-    [Object.keys(messages).length]
-  );
-  const handleDelete = (e: any) => {
-    chats.splice(
-      chats.findIndex((value) => value.name == e.target.value.name),
-      1
-    );
-    delete messages[e.target.value];
-    setMesseges({
-      ...messages,
-    });
+  const chats = Object.keys(messages).map((chat) => ({
+    id: nanoid(),
+    name: chat,
+  }));
+  const onDeleteChat = (name: string) => {
+    const newMessages = { ...messages };
+    delete newMessages[name];
+    setMesseges(newMessages);
   };
   const onAddChat = (newChat: Chat) => {
     setMesseges({
@@ -47,6 +48,7 @@ export const App: FC = () => {
   };
 
   return (
+    <Provider store={store}>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Header />}>
@@ -59,7 +61,7 @@ export const App: FC = () => {
                 <ChatList
                   chats={chats}
                   onAddChat={onAddChat}
-                  handleDelete={handleDelete}
+                  onDeleteChat={onDeleteChat}
                 />
               }
             />
@@ -71,6 +73,7 @@ export const App: FC = () => {
                   onAddChat={onAddChat}
                   messages={messages}
                   onAddMessage={onAddMessage}
+                  onDeleteChat={onDeleteChat}
                 />
               }
             />
@@ -79,6 +82,7 @@ export const App: FC = () => {
 
         <Route path="0*" element={<h2>404 page</h2>} />
       </Routes>
-    </BrowserRouter>
+      </BrowserRouter>
+    </Provider>
   );
 };
