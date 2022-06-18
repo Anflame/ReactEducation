@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import style from './Header.module.scss';
-export const navigete = [
+export const navigate = [
   {
     id: 1,
     name: 'Main',
@@ -23,8 +23,9 @@ export const Header: FC = () => {
     <>
       <header className={style.header}>
         <ul className={style.nav}>
-          {navigete.map((link) => (
+          {navigate.map((link, idx) => (
             <NavLink
+              key={idx}
               to={link.to}
               className={({ isActive }) =>
                 isActive ? style.activeLink : style.disActiveLink
