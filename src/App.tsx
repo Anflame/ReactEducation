@@ -49,39 +49,39 @@ export const App: FC = () => {
 
   return (
     <Provider store={store}>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Header />}>
-          <Route index element={<Main />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="chats">
-            <Route
-              index
-              element={
-                <ChatList
-                  chats={chats}
-                  onAddChat={onAddChat}
-                  onDeleteChat={onDeleteChat}
-                />
-              }
-            />
-            <Route
-              path=":chatId"
-              element={
-                <ChatPage
-                  chats={chats}
-                  onAddChat={onAddChat}
-                  messages={messages}
-                  onAddMessage={onAddMessage}
-                  onDeleteChat={onDeleteChat}
-                />
-              }
-            />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Header />}>
+            <Route index element={<Main />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="chats">
+              <Route
+                index
+                element={
+                  <ChatList
+                    chats={chats}
+                    onAddChat={onAddChat}
+                    onDeleteChat={onDeleteChat}
+                  />
+                }
+              />
+              <Route
+                path=":chatId"
+                element={
+                  <ChatPage
+                    chats={chats}
+                    onAddChat={onAddChat}
+                    messages={messages}
+                    onAddMessage={onAddMessage}
+                    onDeleteChat={onDeleteChat}
+                  />
+                }
+              />
+            </Route>
           </Route>
-        </Route>
 
-        <Route path="0*" element={<h2>404 page</h2>} />
-      </Routes>
+          <Route path="0*" element={<h2>404 page</h2>} />
+        </Routes>
       </BrowserRouter>
     </Provider>
   );
