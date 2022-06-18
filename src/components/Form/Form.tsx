@@ -1,7 +1,7 @@
-import { Dispatch, FC, SetStateAction, useState } from 'react';
+import { FC, useState } from 'react';
 import style from './Form.module.scss';
 import { Button, TextField } from '@mui/material';
-import { Message } from '../comon-types';
+import { Authors, Message } from '../comon-types';
 interface FormProps {
   addMessage: (msg: Message) => void;
 }
@@ -13,7 +13,7 @@ export const Form: FC<FormProps> = ({ addMessage }) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     addMessage({
-      author: 'Anflame',
+      author: Authors.USER,
       text,
     });
     setText('');
