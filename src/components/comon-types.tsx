@@ -1,3 +1,7 @@
+export enum Authors {
+  USER = 'Anflame',
+  BOT = 'BOT',
+}
 export interface Message {
   author: string;
   text: string;

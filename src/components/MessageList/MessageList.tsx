@@ -1,4 +1,4 @@
-import style from './MessageList.module.css';
+import style from './MessageList.module.scss';
 import { Message } from '../comon-types';
 import { FC } from 'react';
 

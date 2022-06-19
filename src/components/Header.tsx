@@ -23,8 +23,9 @@ export const Header: FC = () => {
     <>
       <header className={style.header}>
         <ul className={style.nav}>
-          {navigete.map((link) => (
+          {navigete.map((link, idx) => (
             <NavLink
+              key={idx}
               to={link.to}
               className={({ isActive }) =>
                 isActive ? style.activeLink : style.disActiveLink
@@ -33,7 +34,6 @@ export const Header: FC = () => {
               {link.name}
             </NavLink>
           ))}
-          ;
         </ul>
       </header>
       <main className={style.main}>

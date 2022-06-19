@@ -1,7 +1,5 @@
 import ListItem from '@mui/material/ListItem';
 import List from '@mui/material/List';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
 import style from './ChatList.module.scss';
 import { Chat } from '../comon-types';
 import { FC, useState } from 'react';
@@ -11,12 +9,12 @@ import { Button, TextField } from '@mui/material';
 interface ChatListProps {
   chats: Chat[];
   onAddChat: (chat: Chat) => void;
-  handleDelete?: (e: any) => void;
+  onDeleteChat: (name: string) => void;
 }
 export const ChatList: FC<ChatListProps> = ({
   chats,
   onAddChat,
-  handleDelete,
+  onDeleteChat,
 }) => {
   const [value, setValue] = useState('');
 
@@ -40,9 +38,7 @@ export const ChatList: FC<ChatListProps> = ({
           return (
             <ListItem key={chat.id} className={style.chatListes}>
               <Link to={`/chats/${chat.name}`}>{chat.name}</Link>
-              <button value={chat.name} onClick={handleDelete}>
-                X
-              </button>
+              <button onClick={() => onDeleteChat(chat.name)}>X</button>
             </ListItem>
           );
         })}
