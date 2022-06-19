@@ -22,7 +22,6 @@ export const ChatPage: FC<ChatPageProps> = ({
   const { chatId } = useParams();
 
   useEffect(() => {
-    console.dir(messages);
     if (
       chatId &&
       messages[chatId]?.length > 0 &&

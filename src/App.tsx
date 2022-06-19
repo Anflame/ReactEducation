@@ -79,7 +79,6 @@ export const App: FC = () => {
               />
             </Route>
           </Route>
-
           <Route path="0*" element={<h2>404 page</h2>} />
         </Routes>
       </BrowserRouter>
