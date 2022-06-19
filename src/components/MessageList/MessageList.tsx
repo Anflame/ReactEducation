@@ -1,6 +1,6 @@
 import style from './MessageList.module.scss';
-import { Message } from '../comon-types';
 import { FC } from 'react';
+import { Message } from 'src/store/messages/reducer';
 
 interface messageProps {
   messages: Message[];
