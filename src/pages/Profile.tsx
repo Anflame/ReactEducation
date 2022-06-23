@@ -1,15 +1,15 @@
 import { FC, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Authors } from 'src/components/comon-types';
+import { ProfileState } from 'src/store/profile/reducer';
 import { changeName, toggleProfile } from 'store/profile/actions';
-import { selectVisible, selectName } from 'store/profile/selectors';
 export const Profile: FC = () => {
   const [value, setValue] = useState<string>(Authors.USER);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
-  const visible = useSelector(selectVisible);
-  const name = useSelector(selectName);
+  const visible = useSelector((state: ProfileState) => state.visible);
+  const name = useSelector((state: ProfileState) => state.name);
   const dispatch = useDispatch();
   return (
     <>
