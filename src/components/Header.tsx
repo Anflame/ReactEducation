@@ -34,7 +34,6 @@ export const Header: FC = () => {
               {link.name}
             </NavLink>
           ))}
-          ;
         </ul>
       </header>
       <main className={style.main}>

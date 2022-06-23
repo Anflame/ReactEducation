@@ -1,21 +1,18 @@
 import { FC, useState } from 'react';
 import style from './Form.module.scss';
 import { Button, TextField } from '@mui/material';
-import { Authors, Message } from '../comon-types';
-interface FormProps {
-  addMessage: (msg: Message) => void;
-}
-export const Form: FC<FormProps> = ({ addMessage }) => {
+import { useDispatch } from 'react-redux';
+import { addMessage } from 'src/store/messages/actions';
+import { useParams } from 'react-router';
+export const Form: FC = () => {
+  const { chatName } = useParams();
   const [text, setText] = useState('');
-  const handleText = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setText(event.target.value);
-  };
+  const dispatch = useDispatch();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    addMessage({
-      author: Authors.USER,
-      text,
-    });
+    if (chatName) {
+      dispatch(addMessage(chatName, text));
+    }
     setText('');
   };
   return (
@@ -27,7 +24,7 @@ export const Form: FC<FormProps> = ({ addMessage }) => {
         label="Введите сообщение"
         variant="outlined"
         type="text"
-        onChange={handleText}
+        onChange={(e) => setText(e.target.value)}
         value={text}
         autoFocus={true}
       />
