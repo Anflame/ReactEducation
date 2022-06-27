@@ -2,16 +2,26 @@ import { FC, useState } from 'react';
 import style from './Form.module.scss';
 import { Button, TextField } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { addMessage } from 'src/store/messages/actions';
+import { addMessageWithReply } from 'src/store/messages/actions';
 import { useParams } from 'react-router';
+import { ThunkDispatch } from 'redux-thunk';
+import { Authors } from '../comon-types';
+import { MessagesState } from 'src/store/messages/reducer';
+import { MessageActions } from 'src/store/messages/types';
 export const Form: FC = () => {
   const { chatName } = useParams();
   const [text, setText] = useState('');
-  const dispatch = useDispatch();
+  const dispatch =
+    useDispatch<ThunkDispatch<MessagesState, void, MessageActions>>();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (chatName) {
-      dispatch(addMessage(chatName, text));
+      dispatch(
+        addMessageWithReply(chatName, {
+          author: Authors.USER,
+          text,
+        })
+      );
     }
     setText('');
   };

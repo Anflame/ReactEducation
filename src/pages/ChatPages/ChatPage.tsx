@@ -8,23 +8,6 @@ import { shallowEqual, useSelector } from 'react-redux';
 import { selectMessages } from 'src/store/messages/selectors';
 export const ChatPage: FC = () => {
   const { chatName } = useParams();
-  // useEffect(() => {
-  //   if (
-  //     chatId &&
-  //     messages[chatId]?.length > 0 &&
-  //     messages[chatId][messages[chatId].length - 1].author == Authors.USER
-  //   ) {
-  //     const timer = setTimeout(() => {
-  //       onAddMessage(chatId, {
-  //         author: Authors.BOT,
-  //         text: 'Im BOT',
-  //       });
-  //     }, 1500);
-  //     return () => {
-  //       clearTimeout(timer);
-  //     };
-  //   }
-  // }, [chatId, messages, onAddMessage]);
   const messages = useSelector(selectMessages, shallowEqual);
   if (chatName && !messages[chatName]) {
     return <Navigate to="/chats" replace />;

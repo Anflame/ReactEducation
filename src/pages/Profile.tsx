@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Authors } from 'src/components/comon-types';
-import { changeName, toggleProfile } from 'store/profile/actions';
+import { changeName, toggleProfile } from 'store/profile/slice';
 import { selectVisible, selectName } from 'store/profile/selectors';
 export const Profile: FC = () => {
   const [value, setValue] = useState<string>(Authors.USER);

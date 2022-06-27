@@ -1,4 +1,5 @@
 import { ADD_CHAT, ADD_MESSAGE, DELETE_CHAT } from './actions';
+import { Message } from './reducer';
 
 export type MessageActions =
   | ReturnType<AddChat>
@@ -15,9 +16,9 @@ export type DeleteChat = (chatName: string) => {
 };
 export type AddMessage = (
   chatName: string,
-  text: string
+  message: Message
 ) => {
   type: typeof ADD_MESSAGE;
   chatName: string;
-  text: string;
+  message: Message;
 };
