@@ -1,3 +1,6 @@
+import { Dispatch } from 'redux';
+import { Authors } from 'src/components/comon-types';
+import { Message } from './reducer';
 import { AddChat, AddMessage, DeleteChat } from './types';
 
 export const ADD_MESSAGE = 'MESSAGE::ADD_MESSAGE';
@@ -12,8 +15,27 @@ export const deleteChat: DeleteChat = (chatName) => ({
   type: DELETE_CHAT,
   chatName,
 });
-export const addMessage: AddMessage = (chatName, text) => ({
+export const addMessage: AddMessage = (chatName, message) => ({
   type: ADD_MESSAGE,
   chatName,
-  text,
+  message,
 });
+let timeout: NodeJS.Timeout;
+export const addMessageWithReply =
+  (chatName: string, message: Message) => (dispatch: Dispatch) => {
+    dispatch(addMessage(chatName, message));
+
+    if (message.author == Authors.USER) {
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+      timeout = setTimeout(() => {
+        dispatch(
+          addMessage(chatName, {
+            author: Authors.BOT,
+            text: 'I am BOT',
+          })
+        );
+      }, 1000);
+    }
+  };

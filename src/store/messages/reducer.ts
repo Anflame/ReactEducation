@@ -5,12 +5,12 @@ import { ADD_CHAT, ADD_MESSAGE, DELETE_CHAT } from './actions';
 import { MessageActions } from './types';
 
 export interface Message {
-  id: string;
   author: string;
   text: string;
 }
+type MessagesStateBot = { id: string } & Message;
 export interface MessagesState {
-  [key: string]: Message[];
+  [key: string]: MessagesStateBot[];
 }
 const initialMessage: MessagesState = {
   default: [
@@ -45,8 +45,8 @@ export const messageReducer: Reducer<MessagesState, MessageActions> = (
           ...state[action.chatName],
           {
             id: nanoid(),
-            author: Authors.USER,
-            text: action.text,
+            author: action.message.author,
+            text: action.message.text,
           },
         ],
       };
