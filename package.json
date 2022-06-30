@@ -2,13 +2,14 @@
   "name": "gb_1992",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://andreyosipuk.github.io/GB_1992/",
+  "homepage": "https://anflame.github.io/ReactEducation/",
   "scripts": {
     "start": "webpack serve --mode=development --open",
     "build": "webpack --mode=production",
     "report": "npm run build --withReport true",
     "lint": "npx tsc --noEmit && npx eslint --ext .js,.jsx,.ts,.tsx --fix ./",
     "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "deploy:web": "npm run build && gh-pages -d build",
     "deploy:storybook": "npm run build-storybook && gh-pages -d storybook-static",
     "deploy:coverage": "npm run test:coverage && gh-pages -d coverage/lcov-report",
@@ -88,6 +89,7 @@
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
     "redux": "^4.2.0",
+    "gh-pages": "^4.0.0",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.1",
     "styled-components": "^5.3.5"
