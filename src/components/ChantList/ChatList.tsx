@@ -5,7 +5,7 @@ import { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, TextField } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { addChat, deleteChat } from 'src/store/messages/actions';
+import { addChat, deleteChat } from 'src/store/messages/slice';
 import { selectChats } from 'src/store/messages/selectors';
 export const ChatList: FC = () => {
   const [value, setValue] = useState('');
@@ -16,7 +16,7 @@ export const ChatList: FC = () => {
   );
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(addChat(value));
+    dispatch(addChat({ name: value }));
   };
   return (
     <div className={style.chats}>
@@ -25,7 +25,9 @@ export const ChatList: FC = () => {
           return (
             <ListItem key={chat.id} className={style.chatListes}>
               <Link to={`/chats/${chat.name}`}>{chat.name}</Link>
-              <button onClick={() => dispatch(deleteChat(chat.name))}>X</button>
+              <button onClick={() => dispatch(deleteChat({ name: chat.name }))}>
+                X
+              </button>
             </ListItem>
           );
         })}

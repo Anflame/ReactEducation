@@ -1,24 +1,11 @@
-import { ADD_CHAT, ADD_MESSAGE, DELETE_CHAT } from './actions';
-import { Message } from './reducer';
+export interface Message {
+  author: string;
+  text: string;
+}
 
-export type MessageActions =
-  | ReturnType<AddChat>
-  | ReturnType<DeleteChat>
-  | ReturnType<AddMessage>;
+export type MessagesStateBot = { id: string } & Message;
 
-export type AddChat = (newChat: string) => {
-  type: typeof ADD_CHAT;
-  newChat: string;
-};
-export type DeleteChat = (chatName: string) => {
-  type: typeof DELETE_CHAT;
-  chatName: string;
-};
-export type AddMessage = (
-  chatName: string,
-  message: Message
-) => {
-  type: typeof ADD_MESSAGE;
+export interface AddMessage {
   chatName: string;
   message: Message;
-};
+}
