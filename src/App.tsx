@@ -8,6 +8,10 @@ import { Main } from './pages/Main';
 import { Provider } from 'react-redux';
 import { persistor, store } from './store';
 import { PersistGate } from 'redux-persist/integration/react';
+import { Articles } from './pages/Articles';
+import { SignIn } from './pages/SignIn';
+import { PrivateRoute } from './components/PrivateRoute';
+import { PublicRoute } from './components/PublicRoute';
 export const App: FC = () => {
   return (
     <Provider store={store}>
@@ -16,13 +20,21 @@ export const App: FC = () => {
           <Routes>
             <Route path="/" element={<Header />}>
               <Route index element={<Main />} />
-              <Route path="profile" element={<Profile />} />
-              <Route path="chats">
+              <Route
+                path="profile"
+                element={<PrivateRoute component={<Profile />} />}
+              />
+              <Route path="articles" element={<Articles />} />
+              <Route
+                path="signin"
+                element={<PublicRoute component={<SignIn />} />}
+              />
+              <Route path="chats" element={<PrivateRoute />}>
                 <Route index element={<ChatList />} />
                 <Route path=":chatName" element={<ChatPage />} />
               </Route>
             </Route>
-            <Route path="0*" element={<h2>404 page</h2>} />
+            <Route path="*" element={<h2>404 page</h2>} />
           </Routes>
         </BrowserRouter>
       </PersistGate>
