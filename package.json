@@ -1,8 +1,8 @@
 {
   "name": "reacteducation",
+  "homepage": "https://anflame.github.io/reacteducation/",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://anflame.github.io/ReactEducation/",
   "scripts": {
     "start": "webpack serve --mode=development --open",
     "build": "webpack --mode=production",
