@@ -7,17 +7,50 @@ import { Button, TextField } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { addChat, deleteChat } from 'src/store/messages/slice';
 import { selectChats } from 'src/store/messages/selectors';
-export const ChatList: FC = () => {
+import { push, remove, set } from 'firebase/database';
+import {
+  getChatById,
+  getMessageListById,
+  messagesRef,
+} from 'src/services/firebase';
+import { Chats } from '../comon-types';
+interface ChatListProps {
+  chats: any[];
+  messagesDB: any;
+}
+export const ChatList: FC<ChatListProps> = ({ chats, messagesDB }) => {
   const [value, setValue] = useState('');
   const dispatch = useDispatch();
-  const chats = useSelector(
-    selectChats,
-    (prev, next) => prev.length === next.length
-  );
+
+  // const chats = useSelector(
+  //   selectChats,
+  //   (prev, next) => prev.length === next.length
+  // );
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(addChat({ name: value }));
+
+    if (value) {
+      set(messagesRef, {
+        ...messagesDB,
+        [value]: {
+          name: value,
+        },
+      });
+
+      push(getMessageListById(value), {
+        text: 'Chat has been created',
+        author: 'Admin',
+      });
+
+      setValue('');
+    }
   };
+
+  const handleDeleteChat = (chatName: string) => {
+    remove(getChatById(chatName));
+  };
+
   return (
     <div className={style.chats}>
       <List className={style.chatList}>
@@ -25,9 +58,7 @@ export const ChatList: FC = () => {
           return (
             <ListItem key={chat.id} className={style.chatListes}>
               <Link to={`/chats/${chat.name}`}>{chat.name}</Link>
-              <button onClick={() => dispatch(deleteChat({ name: chat.name }))}>
-                X
-              </button>
+              <button onClick={() => handleDeleteChat(chat.id)}>X</button>
             </ListItem>
           );
         })}

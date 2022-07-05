@@ -1,24 +1,21 @@
 import { FC, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { logIn } from 'src/services/firebase';
-import { changeAuth } from 'src/store/profile/slice';
+import { signUp } from 'src/services/firebase';
 
-export const SignIn: FC = () => {
+export const SignUp: FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       setLoading(true);
       setError('');
-      await logIn(email, password);
-      navigate('/', { replace: true });
+      await signUp(email, password);
+      navigate('/signin', { replace: true });
     } catch (error) {
       setError((error as Error).message);
     } finally {
@@ -28,7 +25,7 @@ export const SignIn: FC = () => {
 
   return (
     <>
-      <h2>Sign In</h2>
+      <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
         <p>Логин:</p>
         <input
@@ -42,9 +39,11 @@ export const SignIn: FC = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button>Войти</button>
+        <br />
+        <button>Sign Up</button>
       </form>
-      {error && <p style={{ color: 'red' }}>Ваш логин или пароль не верны</p>}
+      {loading && <p>Loading....</p>}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
     </>
   );
 };

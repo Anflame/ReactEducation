@@ -9,7 +9,7 @@ interface PrivateRouteProps {
 export const PrivateRoute: FC<PrivateRouteProps> = ({ component }) => {
   const isAuth = useSelector(selectAuth);
   if (!isAuth) {
-    return <Navigate to="/signin" replace />;
+    // return <Navigate to="/signin" replace />;
   }
   return component ? component : <Outlet />;
 };
