@@ -1,8 +1,8 @@
 {
-  "name": "gb_1992",
+  "name": "reacteducation",
+  "homepage": "https://anflame.github.io/reacteducation/",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://anflame.github.io/ReactEducation/",
   "scripts": {
     "start": "webpack serve --mode=development --open",
     "build": "webpack --mode=production",
@@ -19,8 +19,6 @@
     "jest": "jest",
     "test": "jest && npm run loki:test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage --colors",
     "loki:update": "npm run build-storybook && loki update --requireReference --reactUri file:./storybook-static",
